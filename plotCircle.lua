@@ -1,20 +1,26 @@
-local radius = 6.2
-local radianRes = math.rad(10)
-local decPlaces = 3 --decimal places to round to
+--Controllable settings
+local radius = 6.2 --units
+local radianRes = math.rad(10) --radians per sample, out of 2pi radians
+local decPlaces = 3 --decimal places to round outputs to
 
-local cos, sin = math.cos, math.sin
-local mult = 10^decPlaces
+local function main()
+    --Core variables/functions
+    local cos, sin = math.cos, math.sin
+    local mult = 10^decPlaces
+    local round = function(x)
+        roundedX = math.floor((x*mult+0.5))/mult
+        return roundedX
+    end
 
-local round = function(x)
-    roundedX = math.floor((x*mult+0.5))/mult
-    return roundedX
+    --Execution and output
+    print("\ncreating circle with radius", radius)
+    print("(x, y), rads")
+    for radsCovered = 0, math.pi*2, radianRes do
+        print(
+            round(cos(angle))*radius,
+            round(sin(angle))*radius, "\trads:", radsCovered
+        )  
+    end
 end
 
-print("\ncreating circle with radius", radius)
-print("(x, y), rads")
-for radsCovered = 0, math.pi*2, radianRes do
-    print(
-        round(cos(angle))*radius,
-        round(sin(angle))*radius, "\trads:", radsCovered
-    )  
-end
+main()
